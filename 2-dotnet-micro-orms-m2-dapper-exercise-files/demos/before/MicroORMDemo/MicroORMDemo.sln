@@ -1,6 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
+# Visual Studio 15
+VisualStudioVersion = 15.0.28010.2016
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataLayer", "DataLayer\DataLayer.csproj", "{FEB224BB-571A-4AD0-836B-5A96971C404E}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{A8AB66E7-7A94-4F68-945C-E01D0ABBCE1B}"
@@ -10,6 +12,8 @@ EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "Database", "Database\Database.sqlproj", "{B5652D37-40C1-4AD9-86E4-31A13CC0AE7B}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Data", "Data", "{AFAF1FCB-95AA-4DB3-A974-AD63BC4DA879}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DomainModel", "DomainModel\DomainModel.csproj", "{FE668780-CF76-42A5-9ED7-1A0FC350691F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -31,6 +35,10 @@ Global
 		{B5652D37-40C1-4AD9-86E4-31A13CC0AE7B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B5652D37-40C1-4AD9-86E4-31A13CC0AE7B}.Release|Any CPU.Build.0 = Release|Any CPU
 		{B5652D37-40C1-4AD9-86E4-31A13CC0AE7B}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{FE668780-CF76-42A5-9ED7-1A0FC350691F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FE668780-CF76-42A5-9ED7-1A0FC350691F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FE668780-CF76-42A5-9ED7-1A0FC350691F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FE668780-CF76-42A5-9ED7-1A0FC350691F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -38,5 +46,8 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{4A729EF9-AB5D-45CC-B33E-551CE6CB1D4C} = {A8AB66E7-7A94-4F68-945C-E01D0ABBCE1B}
 		{B5652D37-40C1-4AD9-86E4-31A13CC0AE7B} = {AFAF1FCB-95AA-4DB3-A974-AD63BC4DA879}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {2CDBC8EE-F05F-4555-B053-C85672AEBB10}
 	EndGlobalSection
 EndGlobal
