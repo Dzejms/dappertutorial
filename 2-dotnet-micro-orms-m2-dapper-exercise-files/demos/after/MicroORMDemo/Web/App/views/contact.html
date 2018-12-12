@@ -1,0 +1,52 @@
+﻿<section>
+    <form>
+        <fieldset>
+            <legend data-bind="text: 'Contact: ' + contact().firstName() + ' ' + contact().lastName()"></legend>
+
+            <div class="row-fluid" data-bind="with: contact">
+                <div class="span3">
+                    <label>First Name</label>
+                    <input type="text" data-bind="value: firstName" />
+
+                    <label>Last Name</label>
+                    <input type="text" data-bind="value: lastName" />
+
+                    <label>Email</label>
+                    <input type="text" data-bind="value: email" />
+            
+                    <label>Company</label>
+                    <input type="text" data-bind="value: company" />
+            
+                    <label>Title</label>
+                    <input type="text" data-bind="value: title" />
+                </div>
+
+                <div class="span4" >
+                    <div data-bind="foreach: addresses">
+                        <!-- ko ifnot: isDeleted -->
+                        <label>Address <button class="btn btn-link" data-bind="click: $parent.deleteAddress">Delete</button></label>
+                        <input placeholder="Street Address" type="text" class="input-medium" data-bind="value: streetAddress" />
+                        <select class="input-small" data-bind="value: addressType, options: ['Home', 'Business', 'Other']">
+                        </select>
+
+                        <div class="row-fluid">
+                            <input placeholder="City" type="text" data-bind="value: city" class="input-small" />
+                            <select data-bind="value: stateId, options: $root.states, optionsText: 'stateName', optionsValue: 'id', optionsCaption: 'Choose...'" class="input-medium" />
+                            <input placeholder="Zip Code" type="text" data-bind="value: postalCode" class="input-small" />
+                        </div>
+                        <!-- /ko -->
+                    </div>
+                
+                    <a href="#" data-bind="click: addAddress">Add Address</a>    
+                </div>
+                
+            </div>
+            
+        </fieldset>
+
+        <button class="btn btn-primary" data-bind="click: $root.save">Save</button>
+        <a href="/#/home" class="btn">Cancel</a>
+    </form>
+
+    <!--<pre data-bind="text: ko.toJSON($data, null, 2)"></pre>-->
+</section>
