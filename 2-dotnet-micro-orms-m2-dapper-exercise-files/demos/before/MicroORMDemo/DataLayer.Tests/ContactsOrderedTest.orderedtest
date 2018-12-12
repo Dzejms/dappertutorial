@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<OrderedTest name="orderedtest1" storage="c:\users\james\code\repos\learning\pluralsight\microorms\dappertutorial\2-dotnet-micro-orms-m2-dapper-exercise-files\demos\before\microormdemo\datalayer.tests\orderedtest1.orderedtest" id="d2311c86-245b-4049-af26-70219bf569b7" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <TestLinks>
+    <TestLink id="27cdff95-6897-950e-bd59-610fd0c85e2b" name="Get_All_Should_Return_6_Results" storage="bin\debug\microormdemo.datalayer.tests.dll" type="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestElement, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.ObjectModel,   PublicKeyToken=b03f5f7f11d50a3a" />
+    <TestLink id="accff307-7383-05bd-4891-ac2cc5635f8f" name="Delete_Should_Remove_Entity" storage="bin\debug\microormdemo.datalayer.tests.dll" type="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestElement, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.ObjectModel,   PublicKeyToken=b03f5f7f11d50a3a" />
+    <TestLink id="c1ba6f1c-4697-4da2-ccb1-0763cc75f8f5" name="Modify_SHould_Update_Existing_Entity" storage="bin\debug\microormdemo.datalayer.tests.dll" type="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestElement, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.ObjectModel,   PublicKeyToken=b03f5f7f11d50a3a" />
+    <TestLink id="39a631ca-94d3-edcb-d2c1-c114575ebc3d" name="Find_Should_Retrieve_Existing_Entity" storage="bin\debug\microormdemo.datalayer.tests.dll" type="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestElement, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.ObjectModel,   PublicKeyToken=b03f5f7f11d50a3a" />
+    <TestLink id="046d2a86-456b-5e17-4fad-544b9b575a03" name="Insert_Should_Assign_Identity_To_New_Entity" storage="bin\debug\microormdemo.datalayer.tests.dll" type="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestElement, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.ObjectModel,   PublicKeyToken=b03f5f7f11d50a3a" />
+  </TestLinks>
+</OrderedTest>
