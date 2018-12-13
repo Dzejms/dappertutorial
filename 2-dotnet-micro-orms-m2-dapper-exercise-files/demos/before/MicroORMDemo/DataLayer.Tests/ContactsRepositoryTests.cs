@@ -68,7 +68,7 @@ namespace MicroOrmDemo.DataLayer.Tests
         }
 
         [TestMethod]
-        public void Modify_SHould_Update_Existing_Entity()
+        public void Modify_Should_Update_Existing_Entity()
         {
             // Arrange
             Contact contact = repository.Find(id);
