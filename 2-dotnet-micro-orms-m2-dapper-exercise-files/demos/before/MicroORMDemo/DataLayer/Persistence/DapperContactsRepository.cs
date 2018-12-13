@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using MicroOrmDemo.DomainModel;
-
+using System.Transactions;
 
 namespace MicroOrmDemo.DataLayer.Persistence
 {
@@ -45,7 +45,24 @@ namespace MicroOrmDemo.DataLayer.Persistence
 
         public Contact GetFullContact(int id)
         {
-            throw new NotImplementedException();
+            string selectStatement =
+            @"
+                Select * from Contacts Where Id = @Id;
+                Select * from Addresses Where ContactId = @Id;
+            ";
+
+            using (var multipleResults = this.dbConnection.QueryMultiple(selectStatement, new { Id = id }))
+            {
+                Contact contact = multipleResults.Read<Contact>().SingleOrDefault();
+                List<Address> addresses = multipleResults.Read<Address>().ToList();
+
+                if (contact != null & addresses != null)
+                {
+                    contact.Addresses.AddRange(addresses);
+                }
+
+                return contact;
+            }
         }
 
         public void Remove(int id)
@@ -55,7 +72,40 @@ namespace MicroOrmDemo.DataLayer.Persistence
 
         public void Save(Contact contact)
         {
-            throw new NotImplementedException();
+            using (TransactionScope scope = new TransactionScope())
+            {
+                if (contact.IsNew)
+                {
+                    Add(contact);
+                }
+                else
+                {
+                    Update(contact);
+                }
+
+                foreach (Address address in contact.Addresses.Where(ad => !ad.IsDeleted))
+                {
+                    address.ContactId = contact.Id;
+
+                    if (address.IsNew)
+                    {
+                        Add(address);
+                    }
+                    else
+                    {
+                        Update(address);
+                    }
+                }
+
+                if (contact.Addresses.Any(ad => ad.IsDeleted))
+                {
+                    string deleteStatement = "Delete from Addresses where Id in @Ids";
+                    IEnumerable<int> ids = contact.Addresses.Where(ad => ad.IsDeleted).Select(ad => ad.Id);
+                    dbConnection.Execute(deleteStatement, new { Ids = ids });
+                }
+
+                scope.Complete();
+            }
         }
 
         public Contact Update(Contact contact)
@@ -69,6 +119,35 @@ namespace MicroOrmDemo.DataLayer.Persistence
                     Title = @Title
                 Where Id = @Id";
             return dbConnection.Query<Contact>(updateSql, contact).SingleOrDefault();
+        }
+
+        public Address Add(Address address)
+        {
+            string insertStatement = @"
+                Insert Into Addresses (ContactId, AddressType, StreetAddress, City, StateId, PostalCode)
+                Values (@ContactId, @AddressType, @StreetAddress, @City, @StateId, @PostalCode)
+                Select Cast(Scope_Identity() as int)
+            ";
+
+            address.Id = dbConnection.ExecuteScalar<int>(insertStatement, address);
+            return address;
+        }
+
+        public Address Update(Address address)
+        {
+            string updateStatement = @"
+                Update Addresses Set
+                    ContactId = @ContactId,
+                    AddressType = @AddressType,
+                    StreetAddress = @StreetAddress,
+                    City = @City,
+                    StateId = @StateId,
+                    PostalCode = @PostalCode
+                Where Id = @Id
+            ";
+
+            dbConnection.Execute(updateStatement, address);
+            return address;
         }
     }
 }

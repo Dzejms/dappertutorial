@@ -4,6 +4,7 @@ using MicroOrmDemo.DataLayer.Persistence;
 using MicroOrmDemo.DomainModel;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using FluentAssertions;
+using System.Linq;
 
 namespace MicroOrmDemo.DataLayer.Tests
 {
@@ -46,8 +47,18 @@ namespace MicroOrmDemo.DataLayer.Tests
                 Title = "Doer"
             };
 
+            Address address = new Address
+            {
+                AddressType = "Home",
+                StreetAddress = "123 Main Street",
+                City = "Saint Petersburg",
+                StateId = 1,
+                PostalCode = "33701"
+            };
+            contact.Addresses.Add(address);
+
             // Act
-            repository.Add(contact);
+            repository.Save(contact);
 
             // Assert
             contact.Id.Should().NotBe(0, "because identity should have been assigned by DB");
@@ -60,29 +71,32 @@ namespace MicroOrmDemo.DataLayer.Tests
             // Arrange
 
             // Act
-            Contact contact = repository.Find(id);
+            Contact contact = repository.GetFullContact(id);
 
             // Assert
             contact.Should().NotBeNull();
             contact.Id.Should().Be(id);
+            contact.Addresses.Count.Should().Be(1);
         }
 
         [TestMethod]
         public void Modify_Should_Update_Existing_Entity()
         {
             // Arrange
-            Contact contact = repository.Find(id);
+            Contact contact = repository.GetFullContact(id);
 
             // Act
             contact.Title = "CEO";
-            repository.Update(contact);
+            contact.Addresses.First().PostalCode = "34219";
+
+            repository.Save(contact);
 
             IContactsRepository repo2 = new DapperContactsRepository();
-            Contact updatedContact = repo2.Find(id);
+            Contact updatedContact = repo2.GetFullContact(id);
 
             // Assert
             updatedContact.Title.Should().Be("CEO");
-
+            updatedContact.Addresses.First().PostalCode.Should().Be("34219");
         }
 
         [TestMethod]
